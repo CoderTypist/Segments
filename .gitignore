@@ -1,0 +1,9 @@
+test_fork_view
+test_fork_modify
+test_thread
+
+# The makefile should delete all .o files, but just to be safe
+**/*.o
+
+# No need to push pre-compiled headers
+**/*.gch
