@@ -5,7 +5,7 @@
 void SegmentSelector_print(SegmentSelector_t selector)
 {
     // index is 13 bits -> 2^13 = 8192 -> 8192 is 4 digits/characters, hence %-4d
-    if ( 0 == selector.index)
+    if ( 0 == selector.index )
             printf("index: %-4d, table indicator: -, rpl: -\n", 0);
     else
         printf("index: %-4d, table indicator: %d, rpl: %d\n", selector.index, selector.table_indicator, selector.rpl);

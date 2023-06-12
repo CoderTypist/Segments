@@ -4,17 +4,20 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#include "./segment/segment.h"
 #include "./segment/selector.h"
 #include "./segment/descriptor.h"
 
 #define NUM_FORKS 4
 
-void segment_info();
-
 int main()
 {
     // pid of the original process
     pid_t og = getpid();
+
+    // segment usage of the original process
+    segment_info_pid();
+    fflush(stdout);
 
     int i;
     for( i = 0 ; i < NUM_FORKS ; i++ )
@@ -31,8 +34,7 @@ int main()
         // child prints segment info
         if( 0 == ret )
         {
-            printf("pid: %d, i: %d\n", getpid(), i);
-            segment_info();
+            segment_info_pid();
             break;
         }
     }
@@ -48,34 +50,4 @@ int main()
     while( wait(NULL) > 0 );
 
     return 0;
-}
-
-void segment_info()
-{
-    pid_t pid = getpid();
-    printf("pid_t: %-10d ---------------------------------------------------------\n", pid);
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_CS();
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_SS();
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_DS();
-    
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_ES();
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_FS();
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_GS();
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_TR();
-
-    printf("pid_t: %d", pid);
-    SegmentSelector_print_LDTR();
 }

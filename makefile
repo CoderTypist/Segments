@@ -1,7 +1,10 @@
-all: selector.o pseudo.o descriptor.o tests clean
+SEGMENT_TARGETS = selector.o pseudo.o descriptor.o segment.o
+SEGMENT_OBJ_FILES = $(addprefix ./segment/, $(SEGMENT_TARGETS))
 
-tests: *.c ./segment/selector.o ./segment/descriptor.o
-	gcc -o $(basename $<) $^
+all: threads.o $(SEGMENT_TARGETS) tests clean
+
+tests: *.c $(SEGMENT_OBJ_FILES) ./threads/threads.o
+	gcc -o $(basename $<) $^ -lpthread
 
 selector.o: ./segment/selector.c ./segment/selector.h
 	gcc -c ./segment/selector.c -o ./segment/selector.o
@@ -12,5 +15,12 @@ descriptor.o: ./segment/descriptor.c ./segment/descriptor.h
 pseudo.o: ./segment/pseudo.c ./segment/pseudo.h
 	gcc -c ./segment/pseudo.c -o ./segment/pseudo.o
 
+threads.o: ./threads/threads.c ./threads/threads.h
+	gcc -c ./threads/threads.c -o ./threads/threads.o
+
+segment.o: ./segment/segment.c ./segment/segment.h
+	gcc -c ./segment/segment.c -o ./segment/segment.o
+
 clean:
+	rm ./threads/*.o
 	rm ./segment/*.o

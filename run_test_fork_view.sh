@@ -1,3 +1,3 @@
 #!/bin/bash
 
-make && ./test_fork_view | sort 
+make && printf "\n\n\n" && ./test_fork_view | sort 
