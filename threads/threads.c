@@ -1,6 +1,6 @@
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/syscall.h>
 #include <unistd.h>
 #include "threads.h"
 
@@ -11,7 +11,6 @@ pid_t gettid()
         pid_t tid = syscall(SYS_gettid);
         return tid;
     #else
-        fprintf(stderr, "Error: %s: %s: SYS_gettid is not defined. Unable to make a syscall to get thread id.\n", __FILE__, __func__);
-        exit(-1);
+        #error "CompileError: threads.c: gettid(): SYS_gettid is not defined. Unable to make a syscall to get thread id."
     #endif
 }
