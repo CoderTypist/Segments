@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "selector.h"
+#include "pseudo.h"
 #include "segment.h"
 #include "../threads/threads.h"
 
@@ -19,7 +20,7 @@ void _segment_info(pid_t(*get_id)())
     }
 
     pid_t id = get_id();
-    printf("%s: %-10d ---------------------------------------------------------\n", id_type, id);
+    printf("%s: %-10d  --------------------------------------------------------\n", id_type, id);
 
     printf("%s: %d", id_type, id);
     SegmentSelector_print_CS();
@@ -44,6 +45,12 @@ void _segment_info(pid_t(*get_id)())
 
     printf("%s: %d", id_type, id);
     SegmentSelector_print_LDTR();
+
+    printf("%s: %d", id_type, id);
+    PseudoDescriptor_print_GDTR();
+
+    printf("%s: %d", id_type, id);
+    PseudoDescriptor_print_IDTR();
 }
 
 void segment_info_pid()

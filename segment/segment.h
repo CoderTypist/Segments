@@ -2,6 +2,7 @@
 #define _SEGMENT_H_
 
 #include <sys/types.h>
+#include "selector.h"
 
 void _segment_info(pid_t(*get_id)());
 void segment_info_pid();
