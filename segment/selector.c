@@ -78,7 +78,7 @@ SegmentBase_t SegmentSelector_get_FS_base()
     unsigned long fs_base;
     if( -1 == arch_prctl(ARCH_GET_FS, &fs_base) )
     {
-        perror("Error: SegmentSelector_get_and_print(): Unable to access FS base");
+        perror("Error: SegmentSelector_get_FS_base(): Unable to access FS base");
         exit(-1);
     }
     return fs_base;
