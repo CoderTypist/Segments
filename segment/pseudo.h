@@ -1,6 +1,7 @@
 #ifndef _PSEUDO_H_
 #define _PSEUDO_H_
 
+
 struct PseudoDescriptor
 {
     unsigned short limit;
@@ -8,9 +9,9 @@ struct PseudoDescriptor
 } __attribute__((packed));
 typedef struct PseudoDescriptor PseudoDescriptor_t;
 
-PseudoDescriptor_t PseudoDescriptor_get_GDTR();
-PseudoDescriptor_t PseudoDescriptor_get_IDTR();
-PseudoDescriptor_t PseudoDescriptor_print_GDTR();
-PseudoDescriptor_t PseudoDescriptor_print_IDTR();
+
+void PseudoDescriptor_print(PseudoDescriptor_t pseudo);
+PseudoDescriptor_t PseudoDescriptor_get_GDTR_pseudo();
+PseudoDescriptor_t PseudoDescriptor_get_IDTR_pseudo();
 
 #endif // _PSEUDO_H_

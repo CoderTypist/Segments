@@ -5,8 +5,6 @@
 #include <unistd.h>
 
 #include "./segment/segment.h"
-#include "./segment/selector.h"
-#include "./segment/descriptor.h"
 
 #define NUM_FORKS 4
 
@@ -16,7 +14,8 @@ int main()
     pid_t og = getpid();
 
     // segment usage of the original process
-    segment_info_pid();
+    SegmentInfo_show(PIDTYPE_PID);
+    // flush before fork
     fflush(stdout);
 
     int i;
@@ -34,7 +33,7 @@ int main()
         // child prints segment info
         if( 0 == ret )
         {
-            segment_info_pid();
+            SegmentInfo_show(PIDTYPE_PID);
             break;
         }
     }
