@@ -11,8 +11,6 @@ struct SegmentSelector
 typedef struct SegmentSelector SegmentSelector_t;
 
 
-void SegmentSelector_print(SegmentSelector_t selector);
-
 SegmentSelector_t SegmentSelector_get_CS();
 SegmentSelector_t SegmentSelector_get_SS();
 SegmentSelector_t SegmentSelector_get_DS();
@@ -22,15 +20,21 @@ SegmentSelector_t SegmentSelector_get_GS();
 SegmentSelector_t SegmentSelector_get_TR();
 SegmentSelector_t SegmentSelector_get_LDTR();
 
+typedef unsigned long SegmentBase_t;
+SegmentBase_t SegmentSelector_get_FS_base();
+SegmentBase_t SegmentSelector_get_GS_base();
 
-SegmentSelector_t SegmentSelector_print_CS();
-SegmentSelector_t SegmentSelector_print_SS();
-SegmentSelector_t SegmentSelector_print_DS();
-SegmentSelector_t SegmentSelector_print_ES();
-SegmentSelector_t SegmentSelector_print_FS();
-SegmentSelector_t SegmentSelector_print_GS();
-SegmentSelector_t SegmentSelector_print_TR();
-SegmentSelector_t SegmentSelector_print_LDTR();
+void SegmentSelector_print(SegmentSelector_t selector);
+void SegmentSelector_get_and_print_CS();
+void SegmentSelector_get_and_print_SS();
+void SegmentSelector_get_and_print_DS();
+void SegmentSelector_get_and_print_ES();
+void SegmentSelector_get_and_print_FS();
+void SegmentSelector_get_and_print_GS();
+void SegmentSelector_get_and_print_TR();
+void SegmentSelector_get_and_print_LDTR();
+void SegmentSelector_get_and_print_FS_base();
+void SegmentSelector_get_and_print_GS_base();
 
 
 #endif // _SEGMENT_SELECTOR_H_

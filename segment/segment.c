@@ -29,28 +29,34 @@ void _segment_info(PidType_t id_type)
     printf("%s: %-10d --------------------------------------------------------\n", id_type_as_str, id);
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_CS();
+    SegmentSelector_get_and_print_CS();
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_SS();
+    SegmentSelector_get_and_print_SS();
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_DS();
+    SegmentSelector_get_and_print_DS();
     
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_ES();
+    SegmentSelector_get_and_print_ES();
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_FS();
+    SegmentSelector_get_and_print_FS();
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_GS();
+    SegmentSelector_get_and_print_FS_base();
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_TR();
+    SegmentSelector_get_and_print_GS();
 
     printf("%s: %d", id_type_as_str, id);
-    SegmentSelector_print_LDTR();
+    SegmentSelector_get_and_print_GS_base();
+
+    printf("%s: %d", id_type_as_str, id);
+    SegmentSelector_get_and_print_TR();
+
+    printf("%s: %d", id_type_as_str, id);
+    SegmentSelector_get_and_print_LDTR();
 
     printf("%s: %d", id_type_as_str, id);
     PseudoDescriptor_print_GDTR();

@@ -1,5 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <asm/prctl.h>
+#include <sys/prctl.h>
 #include "selector.h"
+
+
+extern int arch_prctl(int code, unsigned long* addr);
 
 
 SegmentSelector_t SegmentSelector_get_CS()
@@ -66,6 +73,28 @@ SegmentSelector_t SegmentSelector_get_LDTR()
     );
 }
 
+SegmentBase_t SegmentSelector_get_FS_base()
+{
+    unsigned long fs_base;
+    if( -1 == arch_prctl(ARCH_GET_FS, &fs_base) )
+    {
+        perror("Error: SegmentSelector_get_and_print(): Unable to access FS base");
+        exit(-1);
+    }
+    return fs_base;
+}
+
+SegmentBase_t SegmentSelector_get_GS_base()
+{
+    unsigned long gs_base;
+    if( -1 == arch_prctl(ARCH_GET_GS, &gs_base) )
+    {
+        perror("Error: SegmentSelector_get_GS_base(): Unable to access GS base");
+        exit(-1);
+    }
+    return gs_base;
+}
+
 void SegmentSelector_print(SegmentSelector_t selector)
 {
     // index is 13 bits -> 2^13 = 8,192 -> 4 digits, hence %4d
@@ -75,50 +104,63 @@ void SegmentSelector_print(SegmentSelector_t selector)
         printf("index: %4d,  table indicator: %d, rpl: %d\n", selector.index, selector.table_indicator, selector.rpl);
 }
 
-SegmentSelector_t SegmentSelector_print_CS()
+void SegmentSelector_get_and_print_CS()
 {
     printf("        __ CS   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_CS());
 }
 
-SegmentSelector_t SegmentSelector_print_SS()
+void SegmentSelector_get_and_print_SS()
 {
     printf("        __ SS   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_SS());
 }
 
-SegmentSelector_t SegmentSelector_print_DS()
+void SegmentSelector_get_and_print_DS()
 {
     printf("        __ DS   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_DS());
 }
 
-SegmentSelector_t SegmentSelector_print_ES()
+void SegmentSelector_get_and_print_ES()
 {
     printf("        __ ES   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_ES());
 }
 
-SegmentSelector_t SegmentSelector_print_FS()
+void SegmentSelector_get_and_print_FS()
 {
     printf("        __ FS   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_FS());
 }
 
-SegmentSelector_t SegmentSelector_print_GS()
+void SegmentSelector_get_and_print_GS()
 {
     printf("        __ GS   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_GS());
 }
 
-SegmentSelector_t SegmentSelector_print_TR()
+void SegmentSelector_get_and_print_TR()
 {
     printf("        __ TR   <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_TR());
 }
 
-SegmentSelector_t SegmentSelector_print_LDTR()
+void SegmentSelector_get_and_print_LDTR()
 {
     printf("        __ LDTR <SEL> = ");
     SegmentSelector_print(SegmentSelector_get_LDTR());
+}
+
+// output looks cleaner when not aligning to the maximum number of digits
+// base is 64 bits -> 2^64 = 18,446,744,073,709,551,616 -> 28 digits
+
+void SegmentSelector_get_and_print_FS_base()
+{
+    printf("        __ FS   <SLB> = %lu\n", SegmentSelector_get_FS_base());
+}
+
+void SegmentSelector_get_and_print_GS_base()
+{
+    printf("        __ GS   <SLB> = %lu\n", SegmentSelector_get_GS_base());
 }
