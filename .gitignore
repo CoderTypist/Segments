@@ -1,6 +1,6 @@
-test_fork_view
-test_fork_modify
+test_fork
 test_thread
+misc*
 
 # The makefile should delete all .o files, but just to be safe
 **/*.o

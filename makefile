@@ -1,10 +1,16 @@
-SEGMENT_TARGETS = selector.o pseudo.o descriptor.o segment.o
-SEGMENT_OBJ_FILES = $(addprefix ./segment/, $(SEGMENT_TARGETS))
+SEGMENT_TARGETS := selector.o pseudo.o descriptor.o segment.o
+SEGMENT_OBJ_FILES := $(addprefix ./segment/, $(SEGMENT_TARGETS))
+TESTS := *.c
 
 all: threads.o $(SEGMENT_TARGETS) tests clean
 
-tests: *.c $(SEGMENT_OBJ_FILES) ./threads/threads.o
-	gcc -o $(basename $<) $^ -lpthread
+tests: $(TESTS) $(SEGMENT_OBJ_FILES) ./threads/threads.o
+	$(foreach fname, $(wildcard $(TESTS)),       \
+		gcc -o ./$(basename $(fname))            \
+		$(SEGMENT_OBJ_FILES) ./threads/threads.o \
+		$(fname)                                 \
+		-lpthread;                               \
+	)
 
 selector.o: ./segment/selector.c ./segment/selector.h
 	gcc -c ./segment/selector.c -o ./segment/selector.o
