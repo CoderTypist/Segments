@@ -28,5 +28,7 @@ typedef struct SegmentInfo SegmentInfo_t;
 SegmentInfo_t* SegmentInfo_get();
 void SegmentInfo_print(SegmentInfo_t* segment_info, PidType_t id_type);
 void SegmentInfo_show(PidType_t id_type);
+void SegmentInfo_process();
+void SegmentInfo_thread();
 
 #endif // _SEGMENT_H_

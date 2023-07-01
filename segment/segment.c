@@ -57,7 +57,7 @@ void SegmentInfo_print(SegmentInfo_t* segment_info, PidType_t id_type)
             exit(-1);
     }
     
-    printf("%s: %-10d --------------------------------------------------------\n", id_type_as_str, id);
+    printf("%s: %-11d --------------------------------------------------------\n", id_type_as_str, id);
 
 
     printf("%s: %d        __ CS   <SEL> = ", id_type_as_str, id);
@@ -102,4 +102,14 @@ void SegmentInfo_show(PidType_t id_type)
     SegmentInfo_t* segment_info = SegmentInfo_get();
     SegmentInfo_print(segment_info, id_type);
     free(segment_info);
+}
+
+void SegmentInfo_process()
+{
+    SegmentInfo_show(PIDTYPE_PID);
+}
+
+void SegmentInfo_thread()
+{
+    SegmentInfo_show(PIDTYPE_TID);
 }

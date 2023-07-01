@@ -22,7 +22,7 @@ void SegmentBase_print(SegmentBase_t base)
 {
     // output looks cleaner when not aligning to the maximum number of digits
     // base is 64 bits -> 2^64 = 18,446,744,073,709,551,616 -> 28 digits
-    printf("%lu\n", base);
+    printf("%-40lu\n", base);
 }
 
 SegmentSelector_t SegmentSelector_get_CS_sel()

@@ -33,7 +33,7 @@ int main()
         // child prints segment info
         if( 0 == ret )
         {
-            SegmentInfo_show(PIDTYPE_PID);
+            SegmentInfo_process();
             break;
         }
     }
