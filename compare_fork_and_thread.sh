@@ -1,7 +1,6 @@
 #!/bin/bash
 
 main() {
-    IFS=$'\n'
     echo "Forking..."
     output_forking=$(./test_fork)
     
@@ -10,9 +9,9 @@ main() {
 
     echo "Merging..."
     lines_forking=()
-    while read -r line; do lines_forking+=("$line"); done < <(echo "${output_forking}")
+    while IFS=$'\n' read -r line; do lines_forking+=("${line}"); done < <(echo "${output_forking}")
     lines_threading=()
-    while read -r line; do lines_threading+=("$line"); done < <(echo "${output_threading}")
+    while IFS=$'\n' read -r line; do lines_threading+=("${line}"); done < <(echo "${output_threading}")
 
     num_lines_forking=${#lines_forking[@]}
     num_lines_threading=${#lines_threading[@]}
