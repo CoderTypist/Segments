@@ -57,7 +57,7 @@ void SegmentInfo_print(SegmentInfo_t* segment_info, PidType_t id_type)
             exit(-1);
     }
     
-    printf("%s: %-11d --------------------------------------------------------\n", id_type_as_str, id);
+    printf("%s: %-10d --------------------------------------------------------\n", id_type_as_str, id);
 
 
     printf("%s: %d        __ CS   <SEL> = ", id_type_as_str, id);

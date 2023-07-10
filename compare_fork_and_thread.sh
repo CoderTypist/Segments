@@ -2,10 +2,10 @@
 
 main() {
     echo "Forking..."
-    output_forking=$(./test_fork)
+    output_forking=$(./test_fork | sort)
     
     echo "Threading..."
-    output_threading=$(./test_thread)
+    output_threading=$(./test_thread | sort)
 
     echo "Merging..."
     lines_forking=()
@@ -18,8 +18,6 @@ main() {
 
     if [[ ${num_lines_forking} -ne ${num_lines_threading} ]]; then
         echo "Error: merging: num_lines_forking(${num_lines_forking}) != num_lines_threading(${num_lines_threading})"
-        echo "num_lines_forking: ${lines_forking[@]}"
-        echo "num_lines_threading: ${lines_threading[@]}"
         exit 1
     fi
     
