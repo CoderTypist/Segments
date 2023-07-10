@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 
-extern bool wsl;
 bool is_wsl();
 
 #endif // _WSL_H_
