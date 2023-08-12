@@ -2,9 +2,6 @@
 test_fork
 test_thread
 
-# Small examples
-misc*
-
 # The makefile should delete all .o files, but just to be safe
 **/*.o
 
